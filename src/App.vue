@@ -1,31 +1,30 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+    <section id="container">
+        <topbar></topbar>
+        <sidebar></sidebar>
+
+        <section id="main-content">
+            <section class="wrapper">
+                <router-view></router-view>
+            </section>
+        </section>
+    </section>
 </template>
 
+<script>
+    import Topbar from './components/Topbar'
+    import Sidebar from './components/Sidebar'
+
+    export default {
+        components: {
+            Topbar,
+            Sidebar
+        }
+    }
+</script>
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+    textarea.form-control {
+        height: 100px;
+    }
 </style>
