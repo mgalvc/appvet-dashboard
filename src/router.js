@@ -6,6 +6,7 @@ import BrandsForm from './views/brands/BrandsForm'
 import ProductsIndex from './views/products/ProductsIndex'
 import ProductsForm from './views/products/ProductsForm'
 import ProductsShow from './views/products/ProductsShow'
+import Login from './views/login/Login'
 
 Vue.use(Router)
 
@@ -53,5 +54,10 @@ export default new Router({
             name: 'products-show',
             component: ProductsShow
         },
+        {
+            path: '/auth',
+            name: 'auth',
+            component: Login
+        }
     ]
 })

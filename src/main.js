@@ -9,13 +9,21 @@ Vue.use(VueResource)
 
 Vue.config.productionTip = false
 
-Vue.http.options.root = 'http://localhost:3000/'
-Vue.http.interceptors.push((request, next) => {
-    Vue.http.headers.common['Authorization'] = 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJpc19hZG1pbiI6dHJ1ZSwiZXhwIjoxNTU4NzE0MDQ3fQ.kuoNHgELbj4GIk7RiCsxl18njr2stDR_4ix-jPr-de0'
-});
-
 new Vue({
     router,
     store,
     render: h => h(App)
 }).$mount('#app')
+
+// Vue.http.options.root = 'http://localhost:3000/'
+Vue.http.options.root = 'http://10.0.0.111:3000/'
+Vue.http.interceptors.push((request, next) => {
+    Vue.http.headers.common['Authorization'] = 'Bearer ' + store.state.auth.token
+
+    next(response => {
+        if(response.status === 401) {
+            store.commit('logout')
+            router.push('/auth')
+        }
+    })
+});

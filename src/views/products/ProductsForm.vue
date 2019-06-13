@@ -112,7 +112,8 @@
                         { key: 2, option: 'Moda canina'},
                     ]
                 },
-                brands: []
+                brands: [],
+                hasPicture: false
             }
         },
         created() {
@@ -133,9 +134,6 @@
                 this.$http.get(`products/${this.id}`)
                     .then(response => {
                         this.product = response.body
-                        if(this.product.picture) {
-                            console.log('tem foto nessa porra')
-                        }
                     })
             },
             doRequest() {
@@ -163,7 +161,7 @@
                 this.submitted = true
                 let me = this;
 
-                if (this.product.picture) {
+                if (this.product.picture && this.product.picture instanceof File) {
                     let reader = new FileReader();
                     reader.readAsDataURL(this.product.picture)
                     reader.onload = function () {

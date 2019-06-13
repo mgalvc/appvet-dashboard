@@ -1,14 +1,19 @@
 <template>
-    <section id="container">
-        <topbar></topbar>
-        <sidebar></sidebar>
+    <div>
+        <section id="container" v-if="$store.state.auth.logged">
+            <topbar></topbar>
+            <sidebar></sidebar>
 
-        <section id="main-content">
-            <section class="wrapper">
-                <router-view></router-view>
+            <section id="main-content">
+                <section class="wrapper">
+                    <router-view></router-view>
+                </section>
             </section>
         </section>
-    </section>
+        <div v-if="!$store.state.auth.logged">
+            <router-view></router-view>
+        </div>
+    </div>
 </template>
 
 <script>
