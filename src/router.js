@@ -7,6 +7,7 @@ import ProductsIndex from './views/products/ProductsIndex'
 import ProductsForm from './views/products/ProductsForm'
 import ProductsShow from './views/products/ProductsShow'
 import Login from './views/login/Login'
+import OrdersIndex from './views/orders/OrdersIndex'
 
 Vue.use(Router)
 
@@ -58,6 +59,11 @@ export default new Router({
             path: '/auth',
             name: 'auth',
             component: Login
+        },
+        {
+            path: '/orders',
+            name: 'orders-index',
+            component: OrdersIndex
         }
     ]
 })

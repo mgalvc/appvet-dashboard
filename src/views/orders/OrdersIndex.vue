@@ -1,0 +1,89 @@
+<template>
+    <div class="row">
+        <div class="col-lg-12">
+            <!--widget start-->
+            <section class="card">
+                <header class="card-header tab-bg-dark-navy-blue p-0">
+                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="waiting-tab" data-toggle="tab" href="#waiting" role="tab"
+                               aria-controls="waiting" aria-selected="true">Aguardando</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="sent-tab" data-toggle="tab" href="#sent" role="tab"
+                               aria-controls="sent" aria-selected="false">Enviados</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="received-tab" data-toggle="tab" href="#received" role="tab"
+                               aria-controls="received" aria-selected="false">Finalizados</a>
+                        </li>
+                    </ul>
+                </header>
+                <div class="card-body">
+                    <div class="tab-content tasi-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="waiting" role="tabpanel"
+                             aria-labelledby="waiting-tab">
+                            <div class="row">
+                                <div v-for="order in orders.waiting" class="col-lg-4">
+                                    <order-card :order="order"></order-card>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab">
+
+                        </div>
+
+                        <div class="tab-pane fade" id="received" role="tabpanel" aria-labelledby="received-tab">
+                            Recent Item goes here
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!--widget end-->
+        </div>
+    </div>
+</template>
+
+<script>
+    import commonIndex from "@/mixins/commonIndex";
+    import OrderCard from  "./OrderCard"
+
+    export default {
+        components: {
+            'order-card': OrderCard
+        },
+        data() {
+            return {
+                orders: {},
+                params: {
+                    column: 'created_at'
+                },
+                filters: {
+                    status: 'waiting'
+                }
+            }
+        },
+        mixins: [commonIndex],
+        methods: {
+            index () {
+                this.$http.get(this.buildURL()).then(response => {
+                    console.log(response)
+                    this.orders = response.body.orders
+                    this.filters = response.body.filters
+                    this.params = response.body.params
+                })
+            },
+
+            buildURL() {
+                let current_page = `?page=${this.params.current_page}`
+                let per_page = `&per_page=${this.params.per_page}`
+                let direction = `&direction=${this.params.direction}`
+                let column = `&column=${this.params.column}`
+                let status = this.filters.status === '' ? '' : `&status=${this.filters.status}`
+                return `orders_grouped${current_page}${per_page}${column}${direction}${status}`
+            }
+        }
+    }
+</script>

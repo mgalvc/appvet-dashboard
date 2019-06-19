@@ -19,6 +19,13 @@
                         <li><router-link to="/brands">Marcas</router-link></li>
                     </ul>
                 </li>
+
+                <li>
+                    <router-link to="/orders">
+                        <i class="fas fa-cart-arrow-down"></i>
+                        <span>Pedidos</span>
+                    </router-link>
+                </li>
             </ul>
             <!-- sidebar menu end-->
         </div>
