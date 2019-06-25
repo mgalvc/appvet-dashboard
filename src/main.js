@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueAlertify from 'vue-alertify'
 import VueResource from 'vue-resource'
 import App from './App.vue'
 import router from './router'
@@ -15,8 +16,8 @@ new Vue({
     render: h => h(App)
 }).$mount('#app')
 
-Vue.http.options.root = 'http://localhost:3000/'
-// Vue.http.options.root = 'http://10.0.0.111:3000/'
+// Vue.http.options.root = 'http://localhost:3000/'
+Vue.http.options.root = 'http://10.0.0.111:3000/'
 Vue.http.interceptors.push((request, next) => {
     Vue.http.headers.common['Authorization'] = 'Bearer ' + store.state.auth.token
 

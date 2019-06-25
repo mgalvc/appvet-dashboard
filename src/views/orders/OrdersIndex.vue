@@ -24,8 +24,8 @@
                         <div class="tab-pane fade show active" id="waiting" role="tabpanel"
                              aria-labelledby="waiting-tab">
                             <div class="row">
-                                <div v-for="order in orders.waiting" class="col-lg-4">
-                                    <order-card :order="order"></order-card>
+                                <div v-for="order in orders.waiting" :key="order.id" class="col-lg-4">
+                                    <order-card @deleted="index" :order="order"></order-card>
                                 </div>
                             </div>
                         </div>
@@ -67,6 +67,14 @@
         },
         mixins: [commonIndex],
         methods: {
+            reload() {
+                this.$http.get('orders_grouped?status=waiting').then(response => {
+                    console.log(response)
+                    this.orders = response.body.orders
+                    this.filters = response.body.filters
+                    this.params = response.body.params
+                })
+            },
             index () {
                 this.$http.get(this.buildURL()).then(response => {
                     console.log(response)
@@ -77,12 +85,7 @@
             },
 
             buildURL() {
-                let current_page = `?page=${this.params.current_page}`
-                let per_page = `&per_page=${this.params.per_page}`
-                let direction = `&direction=${this.params.direction}`
-                let column = `&column=${this.params.column}`
-                let status = this.filters.status === '' ? '' : `&status=${this.filters.status}`
-                return `orders_grouped${current_page}${per_page}${column}${direction}${status}`
+                return `orders_grouped`
             }
         }
     }
