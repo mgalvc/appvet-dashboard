@@ -25,7 +25,7 @@
                     <button class="btn btn-danger btn-sm" @click="openCancelModal()" title="Cancelar">
                         <i class="fa fa-trash"></i>
                     </button>
-                    <button class="btn btn-success btn-sm" @click="" title="Confirmar">
+                    <button class="btn btn-success btn-sm" @click="openConfirmModal()" title="Confirmar">
                         <i class="fa fa-check"></i>
                     </button>
                 </div>
@@ -51,6 +51,25 @@
             }
         },
         methods: {
+            openConfirmModal() {
+                alertify.confirm(
+                    'Confirmar envio',
+                    'Confirma que este pedido já saiu para entrega?',
+                    () => {
+                        this.$http.put(`send_order/${this.order.id}`).then(response => {
+                            if (response.body.success) {
+                                alertify.success('Pedido enviado');
+                                this.$emit('deleted');
+                            } else {
+                                for (let error of response.body.errors) {
+                                    alertify.error(error);
+                                }
+                            }
+                        })
+                    },
+                    () => { }
+                );
+            },
             openCancelModal() {
                 alertify.confirm(
                     'Cancelar pedido',
@@ -60,7 +79,6 @@
                             if (response.status === 200) {
                                 alertify.success('Pedido cancelado');
                                 this.$emit('deleted');
-                                this.$forceUpdate();
                             }
                         })
                     },
