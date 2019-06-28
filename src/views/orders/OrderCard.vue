@@ -21,7 +21,7 @@
                 <div class="col price">
                     R$ {{ order.price }}
                 </div>
-                <div class="col options">
+                <div v-if="showOptions" class="col options">
                     <button class="btn btn-danger btn-sm" @click="openCancelModal()" title="Cancelar">
                         <i class="fa fa-trash"></i>
                     </button>
@@ -38,7 +38,7 @@
     import alertify from 'alertifyjs';
 
     export default {
-        props: ['order'],
+        props: ['order', 'show-options'],
         data() {
             return {
                 client: {
