@@ -33,13 +33,17 @@
                         <div class="tab-pane fade" id="sent" role="tabpanel" aria-labelledby="sent-tab">
                             <div class="row">
                                 <div v-for="order in orders.sent" :key="order.id" class="col-lg-4">
-                                    <order-card :order="order"></order-card>
+                                    <order-card showSentTime="true" :order="order"></order-card>
                                 </div>
                             </div>
                         </div>
 
                         <div class="tab-pane fade" id="received" role="tabpanel" aria-labelledby="received-tab">
-                            Recent Item goes here
+                            <div class="row">
+                                <div v-for="order in received" :key="order.id" class="col-lg-4">
+                                    <order-card showSentTime="true" showReceivedTime="true" :order="order"></order-card>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -61,6 +65,7 @@
         data() {
             return {
                 orders: {},
+                received: {},
                 params: {
                     column: 'created_at'
                 },
@@ -78,6 +83,13 @@
                     this.filters = response.body.filters
                     this.params = response.body.params
                 })
+                this.loadReceived();
+            },
+            loadReceived() {
+                this.$http.get('orders_grouped?status=received&last=3').then(response => {
+                    console.log(response)
+                    this.received = response.body.orders.received
+                })
             },
             index () {
                 this.$http.get(this.buildURL()).then(response => {
@@ -86,6 +98,7 @@
                     this.filters = response.body.filters
                     this.params = response.body.params
                 })
+                this.loadReceived();
             },
 
             buildURL() {

@@ -6,6 +6,11 @@
                 <p class="client-details">{{ order.delivery_address }}</p>
                 <p class="client-details">{{ client.email }}</p>
                 <p class="client-details">{{ client.phone }}</p>
+                <p v-if="showSentTime"
+                   class="client-details"><b>Saiu: {{ new Date(order.sent_at).toLocaleString('pt') }}</b></p>
+                <p v-if="showReceivedTime" class="client-details"><b>Entregue: {{ new
+                    Date(order.updated_at).toLocaleString('pt')
+                    }}</b></p>
             </div>
         </div>
         <table class="table table-hover personal-task">
@@ -38,7 +43,7 @@
     import alertify from 'alertifyjs';
 
     export default {
-        props: ['order', 'show-options'],
+        props: ['order', 'show-options', 'show-sent-time', 'show-received-time'],
         data() {
             return {
                 client: {
