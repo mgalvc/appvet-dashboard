@@ -3,10 +3,10 @@
         <div id="sidebar"  class="nav-collapse">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a class="active">
+                    <router-link to="/" class="active">
                         <i class="fas fa-home"></i>
                         <span>Home</span>
-                    </a>
+                    </router-link>
                 </li>
 
                 <li class="sub-menu">
