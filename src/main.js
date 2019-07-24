@@ -10,14 +10,8 @@ Vue.use(VueResource)
 
 Vue.config.productionTip = false
 
-new Vue({
-    router,
-    store,
-    render: h => h(App)
-}).$mount('#app')
-
-// Vue.http.options.root = 'http://localhost:3000/'
-Vue.http.options.root = 'http://10.0.0.111:3000/'
+Vue.http.options.root = 'http://localhost:3000/'
+// Vue.http.options.root = 'http://10.0.0.111:3000/'
 Vue.http.interceptors.push((request, next) => {
     Vue.http.headers.common['Authorization'] = 'Bearer ' + store.state.auth.token
 
@@ -28,3 +22,9 @@ Vue.http.interceptors.push((request, next) => {
         }
     })
 });
+
+new Vue({
+    router,
+    store,
+    render: h => h(App)
+}).$mount('#app')

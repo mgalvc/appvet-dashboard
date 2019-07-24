@@ -26,6 +26,13 @@
                         <span>Pedidos</span>
                     </router-link>
                 </li>
+
+                <li>
+                    <router-link to="/logs">
+                        <i class="fas fa-history"></i>
+                        <span>Histórico</span>
+                    </router-link>
+                </li>
             </ul>
             <!-- sidebar menu end-->
         </div>

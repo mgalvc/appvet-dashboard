@@ -4,7 +4,7 @@
             <div class="col-lg-3 col-sm-6">
                 <section class="card">
                     <div class="symbol yellow">
-                        <i class="fa fa-shopping-cart"></i>
+                        <i class="fa fa-truck-loading"></i>
                     </div>
                     <div class="value">
                         <h1 class="count">
@@ -18,7 +18,7 @@
             <div class="col-lg-3 col-sm-6">
                 <section class="card">
                     <div class="symbol blue">
-                        <i class="fa fa-location-arrow"></i>
+                        <i class="fa fa-shipping-fast"></i>
                     </div>
                     <div class="value">
                         <h1 class="count">

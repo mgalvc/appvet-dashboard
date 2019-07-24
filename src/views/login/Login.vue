@@ -6,7 +6,7 @@
                 <h2 class="form-signin-heading">Login</h2>
                 <div class="login-wrap">
                     <div class="iconic-input">
-                        <i class="fas fa-store"></i>
+                        <i class="fas fa-user"></i>
                         <input type="text" class="form-control" v-model="login" placeholder="Login">
                     </div>
                     <div class="iconic-input">
@@ -93,7 +93,11 @@
     }
 
     .alert {
-        margin: 30px auto 0;
+        margin: 30px auto -70px;
         max-width: 330px;
+    }
+
+    .form-signin .form-control {
+        position: unset;
     }
 </style>

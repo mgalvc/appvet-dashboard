@@ -8,6 +8,8 @@ import ProductsForm from './views/products/ProductsForm'
 import ProductsShow from './views/products/ProductsShow'
 import Login from './views/login/Login'
 import OrdersIndex from './views/orders/OrdersIndex'
+import LogIndex from './views/log/LogIndex'
+import LogShow from './views/log/LogShow'
 
 Vue.use(Router)
 
@@ -64,6 +66,16 @@ export default new Router({
             path: '/orders',
             name: 'orders-index',
             component: OrdersIndex
+        },
+        {
+            path: '/logs',
+            name: 'logs-index',
+            component: LogIndex
+        },
+        {
+            path: '/logs/:id',
+            name: 'logs-show',
+            component: LogShow
         }
     ]
 })
